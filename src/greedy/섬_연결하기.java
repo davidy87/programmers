@@ -2,6 +2,9 @@ package greedy;
 
 import java.util.*;
 
+/**
+ * Kruskal's Algorithm 사용
+ */
 public class 섬_연결하기 {
     public int solution(int n, int[][] costs) {
         int answer = 0;

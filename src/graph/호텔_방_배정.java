@@ -2,7 +2,7 @@ package graph;
 
 import java.util.*;
 
-public class 호텔_방_배정하기 {
+public class 호텔_방_배정 {
 
     public long[] solution(long k, long[] room_number) {
         Map<Long, Long> reserved = new LinkedHashMap<>();

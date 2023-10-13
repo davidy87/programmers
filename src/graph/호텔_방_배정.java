@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.*;
+
 public class 호텔_방_배정하기 {
 
     public long[] solution(long k, long[] room_number) {

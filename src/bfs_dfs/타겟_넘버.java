@@ -1,22 +1,15 @@
 package bfs_dfs;
 
 public class 타겟_넘버 {
-    private int answer;
-
     public int solution(int[] numbers, int target) {
-        answer = 0;
-        calc(numbers, target, 0, 0);
-
-        return answer;
+        return calc(numbers, target, 0, 0);
     }
 
-    private void calc(int[] numbers, int target, int idx, int sum) {
-        if (idx == numbers.length) {
-            answer += sum == target ? 1 : 0;
-            return;
+    private int calc(int[] numbers, int target, int cur, int i) {
+        if (i == numbers.length) {
+            return cur == target ? 1 : 0;
         }
 
-        calc(numbers, target, idx + 1, sum - numbers[idx]);
-        calc(numbers, target, idx + 1, sum + numbers[idx]);
+        return calc(numbers, target, cur + numbers[i], i + 1) + calc(numbers, target, cur - numbers[i], i + 1);
     }
 }

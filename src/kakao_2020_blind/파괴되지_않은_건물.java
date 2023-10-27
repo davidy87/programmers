@@ -5,6 +5,7 @@ public class 파괴되지_않은_건물 {
     private static int N, M;
 
     public int solution(int[][] board, int[][] skill) {
+        int answer = 0;
         N = board.length;
         M = board[0].length;
         int[][] sum = new int[N + 1][M + 1];
@@ -17,8 +18,8 @@ public class 파괴되지_않은_건물 {
             int degree = s[0] == 1 ? -s[5] : s[5];
 
             sum[r1][c1] += degree;
-            sum[r2 + 1][c1] += -degree;
-            sum[r1][c2 + 1] += -degree;
+            sum[r1][c2 + 1] -= degree;
+            sum[r2 + 1][c1] -= degree;
             sum[r2 + 1][c2 + 1] += degree;
         }
 

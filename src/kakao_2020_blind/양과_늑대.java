@@ -1,16 +1,19 @@
 package kakao_2020_blind;
 
 public class 양과_늑대 {
+    private int[] info;
+    private int[][] edges;
     private static int maxSheep = 0;
 
     public int solution(int[] info, int[][] edges) {
-        boolean[] visited = new boolean[info.length];
-        dfs(0, 0, 0, visited, info, edges);
+        this.info = info;
+        this.edges = edges;
+        dfs(0, 0, 0, new boolean[info.length]);
 
         return maxSheep;
     }
 
-    private void dfs(int node, int numSheep, int numWolf, boolean[] visited, int[] info, int[][] edges) {
+    private void dfs(int node, int numSheep, int numWolf, boolean[] visited) {
         visited[node] = true;
 
         if (info[node] == 0) {
@@ -26,7 +29,7 @@ public class 양과_늑대 {
 
         for (int[] edge : edges) {
             if (visited[edge[0]] && !visited[edge[1]]) {
-                dfs(edge[1], numSheep, numWolf, visited.clone(), info, edges);
+                dfs(edge[1], numSheep, numWolf, visited.clone());
             }
         }
     }

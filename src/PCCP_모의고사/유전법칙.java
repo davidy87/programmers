@@ -14,7 +14,7 @@ public class 유전법칙 {
         return answer;
     }
 
-    public String search(int n, int p) {
+    private String search(int n, int p) {
         int numPerGen = (int) Math.pow(4, n - 1);
 
         if (p <= numPerGen / 4) {

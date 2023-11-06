@@ -14,9 +14,10 @@ public class 외톨이_알파벳 {
             if (c != prev) {
                 if (appeared.contains(c)) {
                     answerSet.add(c);
+                } else {
+                    appeared.add(c);
                 }
 
-                appeared.add(c);
                 prev = c;
             }
         }

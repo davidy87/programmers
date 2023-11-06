@@ -18,16 +18,14 @@ public class 유전법칙 {
         }
 
         int numPerGen = (int) Math.pow(4, n - 1);
-        int numPerPea = numPerGen / 4;
+        int numPerBean = numPerGen / 4;
 
-        if (p <= numPerPea) {
+        if (p <= numPerBean) {
             return "RR";
-        } else if (p > numPerPea * 3) {
+        } else if (p >= numPerBean * 3 + 1) {
             return "rr";
-        } else if (n == 2) {
-            return "Rr";
         } else if (p <= numPerGen / 2) {
-            return search(n - 1, p - numPerPea);
+            return search(n - 1, p - numPerBean);
         }
 
         return search(n - 1, p - numPerGen / 2);

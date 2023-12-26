@@ -1,6 +1,4 @@
-package kakao_2020_blind;
-
-import java.util.*;
+package kakao_blind_2020;
 
 public class 양궁대회 {
     private static int[] ryan;

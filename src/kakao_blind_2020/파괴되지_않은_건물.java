@@ -1,4 +1,4 @@
-package kakao_2020_blind;
+package kakao_blind_2020;
 
 public class 파괴되지_않은_건물 {
 

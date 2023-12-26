@@ -1,4 +1,4 @@
-package kakao_2020_blind;
+package kakao_blind_2020;
 
 public class 사라지는_발판 {
     private static final int[] dx = {0, 1, 0, -1};

@@ -10,7 +10,7 @@ public class 괄호_회전하기 {
         int answer = 0;
 
         for (int i = 0; i < s.length(); i++) {
-            if (isCorrect(s, i)) {
+            if (isCorrect(s)) {
                 answer++;
             }
 
@@ -20,7 +20,7 @@ public class 괄호_회전하기 {
         return answer;
     }
 
-    private boolean isCorrect(String s, int x) {
+    private boolean isCorrect(String s) {
         Deque<Character> stack = new ArrayDeque<>();
 
         for (char c : s.toCharArray()) {

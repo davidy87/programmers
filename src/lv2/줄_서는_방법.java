@@ -17,11 +17,10 @@ public class 줄_서는_방법 {
         int i = 0;
         k--;
 
-        while (n > 0) {
-            fac /= n;
+        while (i < n) {
+            fac /= n - i;
             answer[i++] = people.remove((int) (k / fac));
             k %= fac;
-            n--;
         }
 
         return answer;

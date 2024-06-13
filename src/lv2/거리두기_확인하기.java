@@ -1,6 +1,7 @@
-package kakao.intern._2021;
+package lv2;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class 거리두기_확인하기 {
 

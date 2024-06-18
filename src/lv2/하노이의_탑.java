@@ -1,26 +1,24 @@
 package lv2;
 
+import java.util.*;
+
 public class 하노이의_탑 {
 
-    private int[][] answer;
-    private int idx;
-
     public int[][] solution(int n) {
-        answer = new int[(int) Math.pow(2, n) - 1][2];
-        idx = 0;
-        hanoi(n, 1, 3, 2);
+        List<int[]> answer = new ArrayList<>();
+        hanoi(answer, n, 1, 3, 2);
 
-        return answer;
+        return answer.toArray(new int[answer.size()][2]);
     }
 
-    private void hanoi(int n, int from, int to, int mid) {
+    private void hanoi(List<int[]> move, int n, int from, int to, int mid) {
         if (n == 1) {
-            answer[idx++] = new int[] {from, to};
+            move.add(new int[] {from, to});
             return;
         }
 
-        hanoi(n - 1, from, mid, to);
-        answer[idx++] = new int[] {from, to};
-        hanoi(n - 1, mid, to, from);
+        hanoi(move, n - 1, from, mid, to);
+        move.add(new int[] {from, to});
+        hanoi(move, n - 1, mid, to, from);
     }
 }

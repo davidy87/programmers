@@ -1,4 +1,4 @@
-package lv2;
+package summer_winter_coding;
 
 public class 멀쩡한_사각형 {
 

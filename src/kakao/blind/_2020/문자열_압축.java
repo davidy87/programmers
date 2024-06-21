@@ -18,17 +18,17 @@ public class 문자열_압축 {
                     continue;
                 }
 
-                if (count >= 2) {
+                if (count > 1) {
                     sb.append(count);
+                    count = 1;
                 }
 
                 sb.append(base);
                 base = compare;
-                count = 1;
             }
 
             sb.append(base);
-            answer = Math.min(answer, sb.length());
+            answer = Math.min(sb.length(), answer);
         }
 
         return answer;

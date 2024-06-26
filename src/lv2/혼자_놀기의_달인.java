@@ -5,26 +5,23 @@ import java.util.*;
 public class 혼자_놀기의_달인 {
 
     public int solution(int[] cards) {
-        boolean[] opened = new boolean[cards.length];
+        boolean[] isOpened = new boolean[cards.length + 1];
         List<Integer> counts = new ArrayList<>();
 
-        for (int i = 0; i < cards.length; i++) {
-            int cur = i;
+        for (int n : cards) {
             int count = 0;
 
-            while (!opened[cur]) {
-                opened[cur] = true;
-                cur = cards[cur] - 1;
+            while (!isOpened[n]) {
+                isOpened[n] = true;
+                n = cards[n - 1];
                 count++;
             }
 
-            if (count > 0) {
-                counts.add(count);
-            }
+            counts.add(count);
         }
 
-        counts.sort((c1, c2) -> c2 - c1);
+        counts.sort(Collections.reverseOrder());
 
-        return counts.size() == 1 ? 0 : counts.get(0) * counts.get(1);
+        return counts.get(0) * counts.get(1);
     }
 }

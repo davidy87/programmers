@@ -1,6 +1,7 @@
-package kakao.blind._2023;
+package lv2;
 
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class 이모티콘_할인행사 {
 

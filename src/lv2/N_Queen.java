@@ -3,34 +3,35 @@ package lv2;
 // Backtracking
 public class N_Queen {
 
-    private static int[] board;
-    private static int answer;
+    private int[] board;
+    private int answer;
 
     public int solution(int n) {
         board = new int[n];
-        search(0, n);
+        answer = 0;
+        search(n, 0);
 
         return answer;
     }
 
-    private void search(int r, int n) {
-        if (r == n) {
+    private void search(int n, int row) {
+        if (row == n) {
             answer++;
             return;
         }
 
-        for (int c = 0; c < n; c++) {
-            board[r] = c;
+        for (int col = 0; col < n; col++) {
+            board[row] = col;
 
-            if (isValid(r)) {
-                search(r + 1, n);
+            if (isValid(row)) {
+                search(n, row + 1);
             }
         }
     }
 
-    private boolean isValid(int r) {
-        for (int i = 0; i < r; i++) {
-            if (board[r] == board[i] || r - i == Math.abs(board[r] - board[i])) {
+    private boolean isValid(int row) {
+        for (int i = 0; i < row; i++) {
+            if (board[row] == board[i] || row - i == Math.abs(board[row] - board[i])) {
                 return false;
             }
         }

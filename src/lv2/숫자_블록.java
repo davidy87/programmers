@@ -3,10 +3,12 @@ package lv2;
 public class 숫자_블록 {
 
     public int[] solution(long begin, long end) {
-        int[] answer = new int[(int) (end - begin) + 1];
+        int b = (int) begin;
+        int e = (int) end;
+        int[] answer = new int[e - b + 1];
 
-        for (int n = (int) begin; n <= end; n++) {
-            answer[n - (int) begin] = getMaxDiv(n);
+        for (int i = b; i <= e; i++) {
+            answer[i - b] = getMaxDiv(i);
         }
 
         return answer;
@@ -21,7 +23,7 @@ public class 숫자_블록 {
 
         for (int i = 2; i <= Math.sqrt(n); i++) {
             if (n % i == 0) {
-                div = Math.max(div, i);
+                div = i;
 
                 if (n / i <= 10_000_000) {
                     return n / i;

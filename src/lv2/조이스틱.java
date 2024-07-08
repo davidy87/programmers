@@ -3,21 +3,22 @@ package lv2;
 public class 조이스틱 {
 
     public int solution(String name) {
+        int n = name.length();
         int upDown = 0;
-        int leftRight = name.length();
+        int leftRight = n;
 
-        for (int i = 0; i < name.length(); i++) {
-            char cur = name.charAt(i);
-            upDown += Math.min(cur - 'A', 'Z' - cur + 1);
-            int nextIdx = i + 1;
+        for (int i = 0; i < n; i++) {
+            char c = name.charAt(i);
+            upDown += Math.min(c - 'A', 'Z' - c + 1);
+            int j = i + 1;
 
-            while (nextIdx < name.length() && name.charAt(nextIdx) == 'A') {
-                nextIdx++;
+            while (j < n && name.charAt(j) == 'A') {
+                j++;
             }
 
-            int moveL = i * 2 + name.length() - nextIdx;
-            int moveR = (name.length() - nextIdx) * 2 + i;
-            leftRight = Math.min(leftRight, Math.min(moveL, moveR));
+            int left = i * 2 + (n - j);
+            int right = (n - j) * 2 + i;
+            leftRight = Math.min(leftRight, Math.min(left, right));
         }
 
         return upDown + leftRight;

@@ -1,4 +1,4 @@
-package PCCP_모의고사;
+package PCCP.모의고사;
 
 import java.util.*;
 

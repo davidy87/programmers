@@ -1,4 +1,4 @@
-package PCCP_모의고사;
+package PCCP.모의고사;
 
 public class 유전법칙 {
 

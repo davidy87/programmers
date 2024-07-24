@@ -9,9 +9,9 @@ public class 정수_삼각형 {
             int[] dp = new int[triangle[i + 1].length];
 
             for (int j = 0; j < triangle[i].length; j++) {
-                dp[j] = Math.max(dp[j], triangle[i][j] + triangle[i + 1][j]);
-                dp[j + 1] = Math.max(dp[j + 1], triangle[i][j] +  triangle[i + 1][j + 1]);
-                answer = Math.max(answer, dp[j]);
+                dp[j] = Math.max(triangle[i][j] + triangle[i + 1][j], dp[j]);
+                dp[j + 1] = Math.max(triangle[i][j] + triangle[i + 1][j + 1], dp[j + 1]);
+                answer = Math.max(dp[j], answer);
             }
 
             triangle[i + 1] = dp;

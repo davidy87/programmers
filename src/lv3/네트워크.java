@@ -8,7 +8,7 @@ public class 네트워크 {
 
         for (int c1 = 0; c1 < n; c1++) {
             if (!visited[c1]) {
-                search(n, c1, computers, visited);
+                search(computers, visited, n, c1);
                 answer++;
             }
         }
@@ -16,12 +16,12 @@ public class 네트워크 {
         return answer;
     }
 
-    private void search(int n, int c1, int[][] computers, boolean[] visited) {
+    private void search(int[][] computers, boolean[] visited, int n, int c1) {
         visited[c1] = true;
 
         for (int c2 = 0; c2 < n; c2++) {
-            if (computers[c1][c2] == 1 && !visited[c2]) {
-                search(n, c2, computers, visited);
+            if (c1 != c2 && computers[c1][c2] == 1 && !visited[c2]) {
+                search(computers, visited, n, c2);
             }
         }
     }

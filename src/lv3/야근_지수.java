@@ -12,18 +12,18 @@ public class 야근_지수 {
             pq.offer(w);
         }
 
-        for (int i = 0; i < n; i++) {
-            int curWork = pq.remove();
+        while (n > 0 && !pq.isEmpty()) {
+            int cur = pq.poll();
+            cur--;
+            n--;
 
-            if (curWork == 0) {
-                return 0;
+            if (cur > 0) {
+                pq.offer(cur);
             }
-
-            pq.offer(--curWork);
         }
 
         while (!pq.isEmpty()) {
-            answer += (long) Math.pow(pq.poll(), 2);
+            answer += Math.pow(pq.poll(), 2);
         }
 
         return answer;

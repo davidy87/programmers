@@ -5,23 +5,23 @@ public class 등굣길 {
     private static final int DIV = 1_000_000_007;
 
     public int solution(int m, int n, int[][] puddles) {
-        int[][] map = new int[n + 1][m + 1];
-        boolean[][] flags = new boolean[n + 1][m + 1];
+        int[][] map = new int[m + 1][n + 1];
+        boolean[][] puddleMap = new boolean[m + 1][n + 1];
 
         map[1][1] = 1;
 
         for (int[] p : puddles) {
-            flags[p[1]][p[0]] = true;
+            puddleMap[p[0]][p[1]] = true;
         }
 
-        for (int r = 1; r <= n; r++) {
-            for (int c = 1; c <= m; c++) {
-                if (!(r == 1 && c == 1) && !flags[r][c]) {
-                    map[r][c] = (map[r - 1][c] + map[r][c - 1]) % DIV;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (!(i == 1 && j == 1) && !puddleMap[i][j]) {
+                    map[i][j] = (map[i - 1][j] + map[i][j - 1]) % DIV;
                 }
             }
         }
 
-        return map[n][m];
+        return map[m][n];
     }
 }

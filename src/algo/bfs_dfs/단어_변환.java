@@ -1,18 +1,18 @@
 package algo.bfs_dfs;
 
 public class 단어_변환 {
+
     private int answer;
     private boolean[] visited;
 
     public int solution(String begin, String target, String[] words) {
         answer = 0;
         visited = new boolean[words.length];
-        swap(begin, target, words, 0);
-
+        search(words, 0, begin, target);
         return answer;
     }
 
-    private void swap(String cur, String target, String[] words, int count) {
+    private void search(String[] words, int count, String cur, String target) {
         if (cur.equals(target)) {
             answer = count;
             return;
@@ -21,17 +21,17 @@ public class 단어_변환 {
         for (int i = 0; i < words.length; i++) {
             if (!visited[i] && diff(cur, words[i]) == 1) {
                 visited[i] = true;
-                swap(words[i], target, words, count + 1);
+                search(words, count + 1, words[i], target);
                 visited[i] = false;
             }
         }
     }
 
-    private int diff(String s1, String s2) {
+    private int diff(String a, String b) {
         int numDiff = 0;
 
-        for (int i = 0; i < s1.length(); i++) {
-            if (s1.charAt(i) != s2.charAt(i)) {
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) != b.charAt(i)) {
                 numDiff++;
             }
         }

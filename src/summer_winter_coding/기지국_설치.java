@@ -4,13 +4,12 @@ public class 기지국_설치 {
 
     public int solution(int n, int[] stations, int w) {
         int answer = 0;
+        int s = 0;
         int apt = 1;
-        int i = 0;
 
         while (apt <= n) {
-            if (i < stations.length && stations[i] - w <= apt) {
-                apt = stations[i] + w + 1;
-                i++;
+            if (s < stations.length && apt >= stations[s] - w) {
+                apt = stations[s++] + w + 1;
             } else {
                 apt += w * 2 + 1;
                 answer++;

@@ -1,6 +1,8 @@
-package lv3;
+package kakao.intern._2019;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class 불량_사용자 {
 

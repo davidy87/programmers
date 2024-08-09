@@ -4,18 +4,15 @@ public class 징검다리_건너기 {
 
     public int solution(int[] stones, int k) {
         int answer = 0;
-        int low = 0;
-        int high = 0;
-
-        for (int stone : stones) {
-            high = Math.max(high, stone);
-        }
+        int[] minMax = getMinMax(stones);
+        int low = minMax[0];
+        int high = minMax[1];
 
         while (low <= high) {
             int mid = (low + high) / 2;
 
             if (canCross(stones, k, mid)) {
-                answer = Math.max(answer, mid);
+                answer = Math.max(mid, answer);
                 low = mid + 1;
             } else {
                 high = mid - 1;
@@ -26,20 +23,32 @@ public class 징검다리_건너기 {
     }
 
     private boolean canCross(int[] stones, int k, int n) {
-        int numZero = 0;
-        int maxZero = 0;
+        int zeroRange = 0;
+        int maxZeroRange = 0;
 
         for (int stone : stones) {
             if (stone < n) {
-                numZero++;
+                zeroRange++;
             } else {
-                maxZero = Math.max(maxZero, numZero);
-                numZero = 0;
+                maxZeroRange = Math.max(zeroRange, maxZeroRange);
+                zeroRange = 0;
             }
         }
 
-        maxZero = Math.max(maxZero, numZero);
+        maxZeroRange = Math.max(zeroRange, maxZeroRange);
 
-        return maxZero < k;
+        return maxZeroRange < k;
+    }
+
+    private int[] getMinMax(int[] stones) {
+        int minStone = Integer.MAX_VALUE;
+        int maxStone = 0;
+
+        for (int stone : stones) {
+            minStone = Math.min(stone, minStone);
+            maxStone = Math.max(stone, maxStone);
+        }
+
+        return new int[] {minStone, maxStone};
     }
 }

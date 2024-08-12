@@ -5,51 +5,58 @@ import java.util.*;
 public class 가장_먼_노드 {
 
     public int solution(int n, int[][] edge) {
-        int answer = 0;
-        int[] dists = new int[n + 1];
-        List<Integer>[] graph = new LinkedList[n + 1];
-
-        for (int[] e : edge) {
-            if (graph[e[0]] == null) {
-                graph[e[0]] = new LinkedList<>();
-            }
-
-            if (graph[e[1]] == null) {
-                graph[e[1]] = new LinkedList<>();
-            }
-
-            graph[e[0]].add(e[1]);
-            graph[e[1]].add(e[0]);
-        }
-
-        int maxDist = bfs(graph, dists);
-
-        for (int dist : dists) {
-            if (dist == maxDist) {
-                answer++;
-            }
-        }
-
-        return answer;
+        Map<Integer, List<Integer>> conn = makeConn(edge);
+        return search(conn);
     }
 
-    private int bfs(List<Integer>[] graph, int[] dists) {
+    private int search(Map<Integer, List<Integer>> conn) {
+        Queue<int[]> queue = new LinkedList<>();
+        boolean[] visited = new boolean[conn.size() + 1];
+        Map<Integer, List<Integer>> distMap = new HashMap<>();
         int maxDist = 0;
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(1);
+
+        queue.offer(new int[] {1, 0});
+        visited[1] = true;
 
         while (!queue.isEmpty()) {
-            int cur = queue.poll();
+            int[] cur = queue.poll();
+            int u = cur[0];
+            int dist = cur[1];
 
-            for (int neighbor : graph[cur]) {
-                if (neighbor != 1 && dists[neighbor] == 0) {
-                    queue.offer(neighbor);
-                    dists[neighbor] = dists[cur] + 1;
-                    maxDist = Math.max(maxDist, dists[neighbor]);
+            if (!distMap.containsKey(dist)) {
+                distMap.put(dist, new ArrayList<>());
+            }
+
+            distMap.get(dist).add(u);
+            maxDist = Math.max(dist, maxDist);
+
+            for (int v : conn.get(u)) {
+                if (!visited[v]) {
+                    visited[v] = true;
+                    queue.offer(new int[] {v, dist + 1});
                 }
             }
         }
 
-        return maxDist;
+        return distMap.get(maxDist).size();
+    }
+
+    private Map<Integer, List<Integer>> makeConn(int[][] edge) {
+        Map<Integer, List<Integer>> conn = new HashMap<>();
+
+        for (int[] e : edge) {
+            if (!conn.containsKey(e[0])) {
+                conn.put(e[0], new ArrayList<>());
+            }
+
+            if (!conn.containsKey(e[1])) {
+                conn.put(e[1], new ArrayList<>());
+            }
+
+            conn.get(e[0]).add(e[1]);
+            conn.get(e[1]).add(e[0]);
+        }
+
+        return conn;
     }
 }

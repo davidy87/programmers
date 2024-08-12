@@ -1,36 +1,39 @@
 package lv3;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
 
+/**
+ * Kruskal's Algorithm 사용
+ */
 public class 섬_연결하기 {
-
     public int solution(int n, int[][] costs) {
         int answer = 0;
-        int[] parent = new int[n];
+        int[] conn = new int[n];
         Arrays.sort(costs, Comparator.comparingInt(c -> c[2]));
 
         for (int i = 0; i < n; i++) {
-            parent[i] = i;
+            conn[i] = i;
         }
 
         for (int[] c : costs) {
-            int u = findParent(parent, c[0]);
-            int v = findParent(parent, c[1]);
+            int u = findConnEnd(conn, c[0]);
+            int v = findConnEnd(conn, c[1]);
 
             if (u != v) {
                 answer += c[2];
-                parent[v] = u;
+                conn[v] = u;
             }
         }
 
         return answer;
     }
 
-    private int findParent(int[] parent, int node) {
-        if (parent[node] == node) {
-            return node;
+    private int findConnEnd(int[] conn, int start) {
+        if (conn[start] == start) {
+            return start;
         }
 
-        return parent[node] = findParent(parent, parent[node]);
+        return conn[start] = findConnEnd(conn, conn[start]);
     }
 }

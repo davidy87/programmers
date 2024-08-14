@@ -1,34 +1,30 @@
 package lv3;
 
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class 여행경로 {
 
-    private boolean[] visited;
-    private Queue<String> routes;
-
     public String[] solution(String[][] tickets) {
-        String[] answer = {};
-        visited = new boolean[tickets.length];
-        routes = new PriorityQueue<>();
-        findRoutes(tickets, "ICN", new StringBuilder("ICN"), 0);
+        Queue<String> routes = new PriorityQueue<>();
+        dfs(tickets, routes, new StringBuilder("ICN"), "ICN", 0);
 
-        return routes.peek().split(" ");
+        return routes.poll().split(" ");
     }
 
-    private void findRoutes(String[][] tickets, String cur, StringBuilder route, int count) {
+    private void dfs(String[][] tickets, Queue<String> routes, StringBuilder curRoute, String depart, int count) {
         if (count == tickets.length) {
-            routes.offer(route.toString());
+            routes.offer(curRoute.toString());
             return;
         }
 
         for (int i = 0; i < tickets.length; i++) {
-            if (!visited[i] && tickets[i][0].equals(cur)) {
-                visited[i] = true;
-                route.append(" ").append(tickets[i][1]);
-                findRoutes(tickets, tickets[i][1], route, count + 1);
-                route.delete(route.length() - 4, route.length());
-                visited[i] = false;
+            if (tickets[i][0].equals(depart)) {
+                tickets[i][0] = "";
+                curRoute.append(" ").append(tickets[i][1]);
+                dfs(tickets, routes, curRoute, tickets[i][1], count + 1);
+                curRoute.delete(curRoute.length() - 4, curRoute.length());
+                tickets[i][0] = depart;
             }
         }
     }

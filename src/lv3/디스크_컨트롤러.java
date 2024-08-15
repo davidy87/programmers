@@ -1,30 +1,31 @@
 package lv3;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class 디스크_컨트롤러 {
-
     public int solution(int[][] jobs) {
-        Arrays.sort(jobs, Comparator.comparingInt(j -> j[0]));
-        Queue<int[]> schedule = new PriorityQueue<>(Comparator.comparingInt(j -> j[1]));
+        Queue<int[]> schedule = new PriorityQueue<>((j1, j2) -> j1[1] - j2[1]);
+        Arrays.sort(jobs, (j1, j2) -> j1[0] - j2[0]);
 
         int i = 0;
-        int totalTime = 0;
-        int endTime = 0;
         int numFinished = 0;
+        int totalTime = 0;
+        int curTime = 0;
 
         while (numFinished < jobs.length) {
-            while (i < jobs.length && jobs[i][0] <= endTime) {
+            while (i < jobs.length && jobs[i][0] <= curTime) {
                 schedule.offer(jobs[i++]);
             }
 
-            if (schedule.isEmpty()) {
-                endTime = jobs[i][0];
-            } else {
-                int[] curJob = schedule.poll();
-                endTime += curJob[1];
-                totalTime += endTime - curJob[0];
+            if (!schedule.isEmpty()) {
+                int[] job = schedule.poll();
+                totalTime += curTime - job[0] + job[1];
+                curTime += job[1];
                 numFinished++;
+            } else {
+                curTime = jobs[i][0];
             }
         }
 

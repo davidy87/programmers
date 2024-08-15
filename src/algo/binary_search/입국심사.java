@@ -1,4 +1,4 @@
-package lv3;
+package algo.binary_search;
 
 import java.util.Arrays;
 

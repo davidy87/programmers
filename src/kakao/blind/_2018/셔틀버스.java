@@ -1,33 +1,29 @@
 package kakao.blind._2018;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class 셔틀버스 {
 
     public String solution(int n, int t, int m, String[] timetable) {
-        Queue<String> pq = new PriorityQueue<>();
         int start = timeToMins("09:00");
-        int last = 0;
         int count = 0;
-
-        for (String time : timetable) {
-            pq.offer(time);
-        }
+        int last = 0;
+        int i = 0;
+        Arrays.sort(timetable);
 
         while (n > 0) {
             count = 0;
 
-            while (count < m && !pq.isEmpty()) {
-                int cur = timeToMins(pq.poll());
+            while (count < m && i < timetable.length) {
+                int cur = timeToMins(timetable[i]);
 
-                if (cur <= start) {
-                    count++;
-                    last = cur;
-                } else {
-                    pq.offer(minsToTime(cur));
+                if (cur > start) {
                     break;
                 }
+
+                count++;
+                i++;
+                last = cur;
             }
 
             start += t;
@@ -43,9 +39,9 @@ public class 셔틀버스 {
 
     private int timeToMins(String time) {
         String[] split = time.split(":");
-        int hours = Integer.parseInt(split[0]) * 60;
+        int hours = Integer.parseInt(split[0]);
         int mins = Integer.parseInt(split[1]);
 
-        return hours + mins;
+        return hours * 60 + mins;
     }
 }

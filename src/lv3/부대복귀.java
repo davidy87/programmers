@@ -12,19 +12,19 @@ public class 부대복귀 {
     public int[] solution(int n, int[][] roads, int[] sources, int destination) {
         int[] answer = new int[sources.length];
         int[] dist = new int[n + 1];
+        Map<Integer, List<Integer>> map = getMap(roads);
         Arrays.fill(dist, MAX);
-        Map<Integer, Set<Integer>> map = createMap(roads);
 
         bfs(map, dist, destination);
 
         for (int i = 0; i < sources.length; i++) {
-            answer[i] = dist[sources[i]] < MAX ? dist[sources[i]] : -1;
+            answer[i] = dist[sources[i]] != MAX ? dist[sources[i]] : -1;
         }
 
         return answer;
     }
 
-    private void bfs(Map<Integer, Set<Integer>> map, int[] dist, int dest) {
+    private void bfs(Map<Integer, List<Integer>> map, int[] dist, int dest) {
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(dest);
         dist[dest] = 0;
@@ -41,23 +41,20 @@ public class 부대복귀 {
         }
     }
 
-    private Map<Integer, Set<Integer>> createMap(int[][] roads) {
-        Map<Integer, Set<Integer>> map = new HashMap<>();
+    private Map<Integer, List<Integer>> getMap(int[][] roads) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
 
         for (int[] road : roads) {
-            int u = road[0];
-            int v = road[1];
-
-            if (!map.containsKey(u)) {
-                map.put(u, new HashSet<>());
+            if (!map.containsKey(road[0])) {
+                map.put(road[0], new ArrayList<>());
             }
 
-            if (!map.containsKey(v)) {
-                map.put(v, new HashSet<>());
+            if (!map.containsKey(road[1])) {
+                map.put(road[1], new ArrayList<>());
             }
 
-            map.get(u).add(v);
-            map.get(v).add(u);
+            map.get(road[0]).add(road[1]);
+            map.get(road[1]).add(road[0]);
         }
 
         return map;

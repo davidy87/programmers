@@ -13,13 +13,13 @@ public class 풍선_터트리기 {
 
         for (int i = 1; i < a.length - 1; i++) {
             if (a[i] < a[l]) {
-                l = i;
                 answer++;
+                l = i;
             }
 
             if (a[a.length - 1 - i] < a[r]) {
-                r = a.length - 1 - i;
                 answer++;
+                r = a.length - 1 - i;
             }
         }
 

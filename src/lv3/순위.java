@@ -1,14 +1,15 @@
-package algo.graph;
+package lv3;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Floyd-Warshall algorithm 사용
- */
 public class 순위 {
+
+    /**
+     * Floyd-Warshall algorithm 사용
+     */
     public int solution(int n, int[][] results) {
         int[][] match = getMatchResult(n, results);
         return countCompleted(n, match);
@@ -56,6 +57,9 @@ public class 순위 {
         return match;
     }
 
+    /**
+     * Map 사용
+     */
     public int solution2(int n, int[][] results) {
         int answer = 0;
         Map<Integer, Set<Integer>> winners = new HashMap<>();

@@ -1,7 +1,6 @@
 package kakao.intern._2021;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 public class 표_편집 {
 
@@ -28,7 +27,8 @@ public class 표_편집 {
             }
         }
 
-        StringBuilder sb = new StringBuilder("O".repeat(n - deleted.size()));
+        StringBuilder sb = new StringBuilder(n);
+        sb.append("O".repeat(n - deleted.size()));
 
         while (!deleted.isEmpty()) {
             sb.insert(deleted.pollLast(), "X");
